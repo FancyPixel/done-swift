@@ -215,7 +215,6 @@
 		655C25C71AC6E3BD00F87FD6 /* Done WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				655C25E61AC6E3D900F87FD6 /* Done WatchKit Extension.entitlements */,
 				655C25E71AC6E62600F87FD6 /* EntryTableRowController.swift */,
 				655C25CA1AC6E3BD00F87FD6 /* InterfaceController.swift */,
 				655C25CC1AC6E3BD00F87FD6 /* Images.xcassets */,
@@ -227,6 +226,7 @@
 		655C25C81AC6E3BD00F87FD6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				655C25E61AC6E3D900F87FD6 /* Done WatchKit Extension.entitlements */,
 				655C25C91AC6E3BD00F87FD6 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -850,6 +850,7 @@
 				655C25E21AC6E3BE00F87FD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		655C25E41AC6E3BE00F87FD6 /* Build configuration list for PBXNativeTarget "Done WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -858,6 +859,7 @@
 				655C25E01AC6E3BE00F87FD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
