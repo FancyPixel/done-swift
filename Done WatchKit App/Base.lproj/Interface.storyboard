@@ -15,7 +15,7 @@
                                 <tableRow identifier="EntryRow" id="lqS-ZP-7kf" customClass="EntryTableRowController" customModule="Done_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="40" alignment="left" id="Jac-WX-HuA">
                                         <items>
-                                            <imageView width="20" alignment="left" id="eec-xE-WMx"/>
+                                            <imageView width="20" alignment="left" verticalAlignment="center" image="check-empty" id="eec-xE-WMx"/>
                                             <label width="1" widthAdjustment="-20" height="1" alignment="left" text="Label" id="MnO-6e-bnS"/>
                                         </items>
                                     </group>

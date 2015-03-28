@@ -7,23 +7,33 @@
 //
 import Realm
 import UIKit
+import MMWormhole
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet var tableView: UITableView!
     var dataSource: RLMResults!
+    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.Done", optionalDirectory: "done")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.wormhole.listenForMessageWithIdentifier("watchUpdate", listener: { (_) -> Void in
+            self.reloadEntries()
+        })
         reloadEntries()
+        
+        tableView.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+        tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let container = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 60))
         let textField = UITextField(frame: CGRectMake(10, 10, self.view.frame.size.width - 20, 40))
-        textField.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        textField.layer.cornerRadius = 4
         textField.delegate = self
+        textField.textColor = UIColor.whiteColor()
+        let placeholer = NSAttributedString(string: "Add an item", attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()])
+        textField.attributedPlaceholder = placeholer
         container.addSubview(textField)
         return container
     }
@@ -31,6 +41,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func reloadEntries() {
         dataSource = Entry.allObjects()
         self.tableView.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -46,6 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         entry.completed = false
         realm.addObject(entry)
         realm.commitWriteTransaction()
+        self.wormhole.passMessageObject("update", identifier: "mainUpdate")
         reloadEntries()
         return true
     }
@@ -68,6 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         realm.beginWriteTransaction()
         entry.completed = !entry.completed
         realm.commitWriteTransaction()
+        self.wormhole.passMessageObject("update", identifier: "mainUpdate")
         reloadEntries()
     }
     
