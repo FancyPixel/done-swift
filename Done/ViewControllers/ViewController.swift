@@ -48,7 +48,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        println(countElements(textField.text))
         if (countElements(textField.text) == 0) {
             return false
         }

@@ -2,6 +2,10 @@
 
 A sample app demonstrating how to share data between an app an its Watch extension using Realm.
 
+
+![Demo](https://raw.githubusercontent.com/FancyPixel/done-swift/master/assets/screenshot.gif)
+
+
 #MIT License
 
 	Copyright (c) 2015 Fancy Pixel. All rights reserved.
