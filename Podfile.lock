@@ -11,7 +11,7 @@ DEPENDENCIES:
   - Realm (~> 0.91)
 
 SPEC CHECKSUMS:
-  MMWormhole: 48452a7149eba409e9dffad661451fa25b9e97c4
-  Realm: 81adfc7f43f9301f40bbc46d5e8a10aaf71b9504
+  MMWormhole: 941cd168b4afd6073f883b82944d6eded4e00203
+  Realm: b9c1fd9defa26aa7276ce938a8df52ec81f24528
 
 COCOAPODS: 0.36.1

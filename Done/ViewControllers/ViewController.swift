@@ -7,20 +7,19 @@
 //
 import Realm
 import UIKit
-import MMWormhole
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet var tableView: UITableView!
     var dataSource: RLMResults!
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.Done", optionalDirectory: "done")
-    
+    var realmToken: RLMNotificationToken?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.wormhole.listenForMessageWithIdentifier("watchUpdate", listener: { (_) -> Void in
+        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             self.reloadEntries()
-        })
+        }
         reloadEntries()
         
         tableView.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
@@ -59,7 +58,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         entry.completed = false
         realm.addObject(entry)
         realm.commitWriteTransaction()
-        self.wormhole.passMessageObject("update", identifier: "mainUpdate")
         reloadEntries()
         return true
     }
@@ -82,7 +80,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         realm.beginWriteTransaction()
         entry.completed = !entry.completed
         realm.commitWriteTransaction()
-        self.wormhole.passMessageObject("update", identifier: "mainUpdate")
         reloadEntries()
     }
     

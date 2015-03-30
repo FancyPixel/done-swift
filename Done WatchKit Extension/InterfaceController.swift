@@ -9,12 +9,11 @@
 import WatchKit
 import Foundation
 import Realm
-import MMWormhole
 
 class InterfaceController: WKInterfaceController {
 
     @IBOutlet var watchTable: WKInterfaceTable!
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.it.fancypixel.Done", optionalDirectory: "done")
+    var realmToken: RLMNotificationToken?
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -22,9 +21,9 @@ class InterfaceController: WKInterfaceController {
         let directory: NSURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.it.fancypixel.Done")!
         let realmPath = directory.path!.stringByAppendingPathComponent("db.realm")
         RLMRealm.setDefaultRealmPath(realmPath)
-        self.wormhole.listenForMessageWithIdentifier("mainUpdate", listener: { (_) -> Void in
+        realmToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             self.reloadTableData()
-        })
+        }
         reloadTableData()
     }
     
@@ -51,7 +50,6 @@ class InterfaceController: WKInterfaceController {
         realm.beginWriteTransaction()
         entry.completed = !entry.completed
         realm.commitWriteTransaction()
-        self.wormhole.passMessageObject("update", identifier: "watchUpdate")
         reloadTableData()
     }
 
