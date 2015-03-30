@@ -1,17 +1,12 @@
 PODS:
-  - MMWormhole (1.1.1):
-    - MMWormhole/Core (= 1.1.1)
-  - MMWormhole/Core (1.1.1)
   - Realm (0.91.1):
     - Realm/Headers (= 0.91.1)
   - Realm/Headers (0.91.1)
 
 DEPENDENCIES:
-  - MMWormhole (~> 1.1)
   - Realm (~> 0.91)
 
 SPEC CHECKSUMS:
-  MMWormhole: 941cd168b4afd6073f883b82944d6eded4e00203
   Realm: b9c1fd9defa26aa7276ce938a8df52ec81f24528
 
 COCOAPODS: 0.36.1
