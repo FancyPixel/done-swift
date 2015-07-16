@@ -34,8 +34,8 @@ class InterfaceController: WKInterfaceController {
         watchTable.setNumberOfRows(Int(dataSource.count), withRowType: "EntryRow")
         
         for index in 0..<Int(dataSource.count) {
-            let entry = dataSource[UInt(index)] as Entry
-            if let row = watchTable.rowControllerAtIndex(index) as? EntryTableRowController {
+            if let row = watchTable.rowControllerAtIndex(index) as? EntryTableRowController,
+                let entry = dataSource[UInt(index)] as? Entry {
                 row.textLabel.setText(entry.title)
                 let imageName = entry.completed ? "check-completed" : "check-empty"
                 row.imageCheck.setImageNamed(imageName)
@@ -45,12 +45,13 @@ class InterfaceController: WKInterfaceController {
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
         let dataSource = Entry.allObjects()
-        let entry = dataSource[UInt(rowIndex)] as Entry
-        let realm = RLMRealm.defaultRealm()
-        realm.beginWriteTransaction()
-        entry.completed = !entry.completed
-        realm.commitWriteTransaction()
-        reloadTableData()
+        if let entry = dataSource[UInt(rowIndex)] as? Entry {
+            let realm = RLMRealm.defaultRealm()
+            realm.beginWriteTransaction()
+            entry.completed = !entry.completed
+            realm.commitWriteTransaction()
+            reloadTableData()
+        }
     }
 
     override func willActivate() {

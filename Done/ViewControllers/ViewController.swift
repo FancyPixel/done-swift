@@ -47,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (countElements(textField.text) == 0) {
+        if (count(textField.text) == 0) {
             return false
         }
         textField.resignFirstResponder()
@@ -67,20 +67,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-        let entry = dataSource[UInt(indexPath.row)] as Entry
-        cell.textLabel!.text = entry.title
-        cell.accessoryType = entry.completed ? .Checkmark : .None
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        if let entry = dataSource[UInt(indexPath.row)] as? Entry {
+            cell.textLabel!.text = entry.title
+            cell.accessoryType = entry.completed ? .Checkmark : .None
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let entry = dataSource[UInt(indexPath.row)] as Entry
-        let realm = RLMRealm.defaultRealm()
-        realm.beginWriteTransaction()
-        entry.completed = !entry.completed
-        realm.commitWriteTransaction()
-        reloadEntries()
+        if let entry = dataSource[UInt(indexPath.row)] as? Entry {
+            let realm = RLMRealm.defaultRealm()
+            realm.beginWriteTransaction()
+            entry.completed = !entry.completed
+            realm.commitWriteTransaction()
+            reloadEntries()
+        }
     }
     
 }
