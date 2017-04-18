@@ -1,14 +1,14 @@
-#Done!
+# Done!
 
 A sample app demonstrating how to share data between an app an its Watch extension using Realm. 
 You can read more about it [here](http://fancypixel.github.io/blog/2015/03/29/share-data-between-watchkit-and-your-app-with-realm/).
 
-##Screenshot
+## Screenshot
 
 ![Demo](https://raw.githubusercontent.com/FancyPixel/done-swift/master/assets/screenshot.gif)
 
 
-#MIT License
+# MIT License
 
 	Copyright (c) 2015 Fancy Pixel. All rights reserved.
 
